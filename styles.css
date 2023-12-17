@@ -495,3 +495,58 @@ button {
   margin-right: 0;
 }
 
+.reg-form{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  z-index: 5;
+  
+  .reg-container{
+    width: 400px;
+    height: fit-content;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+    .container-content{
+    
+      .header-form{
+
+        .form-img{
+          width: auto;
+          height: 100px;
+          margin-top: 20px;
+        }
+        text-align: center;
+      }
+      form {
+        max-width: 400px;
+        padding-bottom: 20px;
+      }
+      label {
+        display: block;
+      }
+      input{
+        width: 100%;
+        padding: 8px;
+        box-sizing: border-box;
+        border-radius: 20px;
+      }
+      .reg-btn{
+        text-align: center;
+        .tombol-masuk{
+          background: linear-gradient(to bottom right, #00A7D6, #0A767B);
+          color: #fff;
+          border: 1px solid transparent;
+        }
+      }
+      .login-txt{
+        list-style: none;
+        color: white;
+      }
+    }
+  }
+}

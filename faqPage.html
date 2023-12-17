@@ -1,44 +1,411 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" charset="utf-8"></script>
+  <style media="screen">
+    body::before,
+    body::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+    }
 
-    <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.7.8/build/player/lottie.min.js"></script>
+    body::before {
+      left: 0;
+      width: 60%;
+      height: 100%;
+      background-image: url('images/lineTexture.svg');
+      background-size: 100%;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
 
-    <title>FAQ | CyberCrime Reporting Portal</title>
+    body::after {
+      content: '';
+      display: block;
+      position: fixed;
+      top: -60%;
+      right: -35%;
+      width: 100%;
+      height: 200%;
+      background-image: url('images/glowTexture.svg');
+      background-size: contain;
+      background-position: top right;
+      background-repeat: no-repeat;
+      z-index: 0;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      padding: 10px 20px;
+      margin: 0 100px;
+      margin-top: 0px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .logo img {
+      margin-top: 29px;
+      height: 60px;
+    }
+
+    nav {
+      margin-top: -50px;
+      margin-left: 830px;
+      flex-grow: 1;
+    }
+
+    .menu-container {
+      background-color: #303536;
+      border-radius: 40px;
+      overflow: hidden;
+      padding: 20px;
+      width: fit-content;
+    }
+
+    .menu {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #fff;
+      padding-left: 25px;
+      padding-right: 25px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      border-radius: 30px;
+      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Titillium Web', sans-serif;
+      font-size: medium;
+      font-weight: 600;
+    }
+
+    .nav-link:hover {
+      background: linear-gradient(to bottom right, #00A7D6, #0A767B);
+      color: #fff;
+    }
+
+    .nav-link.active {
+      background: linear-gradient(to bottom right, #00A7D6, #0A767B);
+      color: #fff;
+    }
+
+    .buttons {
+      margin-top: -57px;
+      margin-left: 1200px;
+      display: flex;
+      align-items: center;
+    }
+
+    .buttons button {
+      border: none;
+      border-radius: 30px;
+      padding: 15px 30px;
+      cursor: pointer;
+      margin-left: 15px;
+      transition: background-color 0.5s;
+      font-family: 'Titillium Web', sans-serif;
+      font-size: medium;
+      font-weight: 600;
+    }
+
+    .login-btn {
+      background-color: #fff;
+      border: 1px solid #fff;
+    }
+
+    .login-btn:hover {
+      background-color: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+    }
+
+    .register-btn {
+      background: linear-gradient(to bottom right, #00A7D6, #0A767B);
+      color: #fff;
+      border: 1px solid transparent;
+    }
+
+    .register-btn:hover {
+      background: transparent;
+      border: 1px solid #fff;
+      color: #fff;
+    }
+
+
+    /* Gaya untuk judul "About Us" */
+    .faq-title {
+      font-size: 5em;
+      font-weight: bold;
+      background-color: #ffff;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-family: 'Titillium Web', sans-serif;
+      text-align: center;
+      margin-top: 100px;
+      position: relative;
+    }
+
+    /* Garis di bawah judul "About Us" */
+    .faq-title::after {
+        
+      content: '';
+      display: block;
+      width: 15%;
+      height: 7px;
+      background-color: #3ED5DD;
+      position: absolute;
+      top: 100pt;
+      bottom: -10px;
+      left: 42.5%;
+    }
+
+.accordions {
+  width: 80%;
+  margin: 100px auto;
+  padding: 20px; /* Optional: add padding to match the body padding */
+  position: relative;
+  z-index: 1; /* Set a higher z-index to bring it to the forefront */
+}
+
+.accordions h3 {
+text-align: center;
+font-family: "Roboto", sans-serif;
+font-weight: bold;
+}
+
+.accordion-item {
+background: linear-gradient(to top, #00A7D6, #0A767B);
+margin-bottom: 20px;
+border: 1px solid #100e34;
+border-radius: 5px;
+color: #ffffff;
+}
+
+.accordion-item .accordion-title {
+cursor: pointer;
+padding: 20px;
+transition: transform 0.4s ease-in-out;
+}
+
+.accordion-item .accordion-title.active-title {
+background-color: #005261;
+color: #ffffff;
+}
+
+.accordion-item .accordion-title h3 {
+font-weight: 700;
+margin: 0;
+font-size: 18px;
+display: flex;
+justify-content: space-between;
+font-weight: bold;
+}
+
+.accordion-item .accordion-title i.fa-chevron-down {
+transform: rotate(0);
+transition: 0.4s;
+}
+
+.accordion-item .accordion-title i.fa-chevron-down.chevron-top {
+transform: rotate(-180deg);
+color: #fa5019;
+}
+
+.accordion-item .accordion-content {
+display: none;
+line-height: 1.7;
+padding: 20px;
+background-color: #ffffff;
+border-radius: 0 0 5px 5px;
+color: #100e34;
+}
+
+.accordion-item .accordion-content.active {
+display: block;
+}
+
+.accordion-item .accordion-content p {
+margin: 0;
+font-family: "Nunito Sans", sans-serif;
+font-size: 16px;
+}
+
+.details {
+background: #dce1f2;
+}
+
+.details .detailed_info {
+margin: 50px auto;
+}
+
+.details img {
+margin: 0 auto;
+display: block;
+/* margin-top: 120px; */
+}
+
+.details h3 {
+font-family: "Poppins", sans-serif;
+font-weight: bold;
+font-size: 20px;
+}
+
+.details p {
+font-family: "Nunito Sans", sans-serif;
+font-size: 16px;
+line-height: 1.5em;
+}
+
+.details ul li {
+font-family: "Nunito Sans", sans-serif;
+font-size: 16px;
+line-height: 1.7em;
+}
+
+  </style>
 </head>
+<body style="margin: 0; padding: 0; background-color: #171717; font-family: 'Poppins', sans-serif; position: relative;">
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+  <header>
+    <div class="logo">
+      <img src="images/logo.svg" alt="Cyber Crime Reporting Portal">
+    </div>
+    <nav>
+      <div class="menu-container">
+        <ul class="menu">
+            <li><a href="index.html" class="nav-link" id="home">Home</a></li>
+            <li><a href="faqPage.html" class="nav-link active" id="faq">FAQ</a></li>
+            <li><a href="ourTeam.html" class="nav-link" id="contact">Report</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="buttons">
+      <button class="login-btn">Masuk</button>
+      <button class="register-btn">Daftar</button>
+    </div>
+  </header>
 
-<body>
-    <header>
-        <div class="logo">
-          <img src="images/logo.svg" alt="Cyber Crime Reporting Portal">
-        </div>
-        <nav>
-          <div class="menu-container">
-            <ul class="menu">
-                <li><a href="#" class="nav-link" id="home">Home</a></li>
-                <li><a href="faqPage.html" class="nav-link" id="faq">FAQ</a></li>
-                <li><a href="#" class="nav-link" id="contact">Contact Us</a></li>
-                <li><a href="#" class="nav-link" id="menu">Our Menu</a></li>
-            </ul>
-          </div>
-        </nav>
-        <div class="buttons">
-          <button class="login-btn">Login</button>
-          <button class="register-btn">Daftar</button>
-        </div>
-      </header>
+  <div class="faq-title">FAQ</div>
+
+
+   <section id="faq">
+
     
+    <div class="container faq">
 
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="accordions">
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item1">
+                  <h3>Why FutureRDP? <i class="fa fa-chevron-down"></i></h3>
+                </div>
+                <div class="accordion-content" id="item1">
+                  <p>
+                    FutureRDP provides cheap and affordable Linux and Windows VPS servers and
+                    storage solution since 2008 for more than 11 years in multiple locations such as
+                    the United States, UK, France, Germany, Netherlands, and Canada. We have a range
+                    of different solutions for different purposes such as SSD VPS and Storage
+                    servers. All servers are equipped with RAID10 only SSD drives and FREE DDoS
+                    Protection!
+                  </p>
+                </div>
+              </div>
 
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item2">
+                  <h3>What is Windows VPS? <i class="fa fa-chevron-down"></i></h3>
+                </div>
+                <div class="accordion-content" id="item2">
+                  <p>
+                    With a Windows VPS server, you will get a Remote Desktop connection within a few
+                    minutes. You can run Windows applications such as IIS, SQL, Microsoft Exchange
+                    or any software like Docking, Forex trading, Crypto Trading etc… or anything
+                    which you wish for. Just like your own computer!! but the difference is online
+                    24/7 days without interruptions and with a super fast Internet connection!
+                  </p>
+                </div>
+              </div>
 
-    <script src="script.js"></script>
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item3">
+                  <h3>Payment Options <i class="fa fa-chevron-down"></i></h3>
+                </div>
+                <div class="accordion-content" id="item3">
+                  <p>
+                    Unlike most other providers you don’t have to pay with just Credit Card or
+                    PayPal. You can also pay with Bitcoin, Alt Coins like Ethereum or Litecoin,
+                    PerfectMoney, Payza and of course you can still pay by PayPal and Credit Cards.
+                    You even get more discounts when you choose longer-term commitments like our
+                    attractive yearly plans.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item4">
+                  <h3>Free DDOS Protection <i class="fa fa-chevron-down"></i></h3>
+                </div>
+                <div class="accordion-content" id="item4">
+                  <p>
+                    Unlike other providers who charge extra for DDoS protection, All of our VPS
+                    servers comes with DDoS protection for FREE. This means you do not have to worry
+                    about your VPS performance at all. We are taking care of your needs while you do
+                    focus on your business!
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script type="text/javascript">
+  $(document).ready(function () {
+    $(".accordion-title").click(function (e) {
+      var accordionitem = $(this).attr("data-tab");
+      $("#" + accordionitem)
+        .slideToggle()
+        .parent()
+        .siblings()
+        .find(".accordion-content")
+        .slideUp();
+
+      $(this).toggleClass("active-title");
+      $("#" + accordionitem)
+        .parent()
+        .siblings()
+        .find(".accordion-title")
+        .removeClass("active-title");
+
+      $("i.fa-chevron-down", this).toggleClass("chevron-top");
+      $("#" + accordionitem)
+        .parent()
+        .siblings()
+        .find(".accordion-title i.fa-chevron-down")
+        .removeClass("chevron-top");
+    });
+  });
+
+  </script>
 </body>
-
 </html>

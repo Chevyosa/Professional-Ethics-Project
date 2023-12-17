@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const pageMappings = {
       'home': 'index.html',
       'faq': 'faqPage.html',
+      'aboutUsDetail': 'aboutUsDetail.html', // Add the new mapping
       // Add more mappings as needed
     };
     const targetUrl = pageMappings[pageId];
@@ -31,6 +32,13 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
       console.error(`Target URL not defined for link ID: ${pageId}`);
     }
+  }
+
+  const readMoreButton = document.getElementById('readMoreBtn');
+  if (readMoreButton) {
+    readMoreButton.addEventListener('click', function () {
+      navigateToPage('aboutUsDetail');
+    });
   }
 
   const lottieAboutUsContainer = document.getElementById('lottie-about-us');

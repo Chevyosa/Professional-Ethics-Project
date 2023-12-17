@@ -58,6 +58,7 @@ header {
 
 nav {
   margin-top: 35px;
+  margin-left: 300px;
   flex-grow: 1;
 }
 

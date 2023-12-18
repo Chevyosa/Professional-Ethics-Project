@@ -1,3 +1,14 @@
+<?php
+    include 'koneksi.php';
+    //inisialisasi session
+    session_start();
+    //mengecek username pada session
+    if( !isset($_SESSION['email']) ){
+      $_SESSION['msg'] = 'anda harus login untuk mengakses halaman ini';
+      header('Location: masuk.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -274,26 +285,24 @@ button {
 
         .next-btn:hover {
             background: transparent;
-  border: 1px solid #F66950;
-  color: #F66950;
-
+            border: 1px solid #F66950;
+            color: #F66950;
         }
 
         .report-title {
-      font-size: 5em;
-      font-weight: bold;
-      background-color: #ffff;
-      -webkit-background-clip: text;
-      color: transparent;
-      font-family: 'Titillium Web', sans-serif;
-      text-align: center;
-      margin-top: 70px;
-      position: relative;
-    }
+            font-size: 5em;
+            font-weight: bold;
+            background-color: #ffff;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-family: 'Titillium Web', sans-serif;
+            text-align: center;
+            margin-top: 70px;
+            position: relative;
+        }
 
     /* Garis di bawah judul "About Us" */
     .report-title::after {
-        
       content: '';
       display: block;
       width: 15%;
@@ -324,8 +333,7 @@ button {
       </div>
     </nav>
     <div class="buttons">
-      <a href="masuk.php"><button class="login-btn">Masuk</button></a>
-      <a href="daftar.php"><button class="register-btn">Daftar</button></a>
+      <a href="logout.php"><button class="register-btn">Keluar</button></a>
     </div>
   </header>
 

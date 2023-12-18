@@ -1,10 +1,21 @@
+<?php
+    include 'koneksi.php';
+    //inisialisasi session
+    session_start();
+    //mengecek username pada session
+    if( !isset($_SESSION['email']) ){
+      $_SESSION['msg'] = 'anda harus login untuk mengakses halaman ini';
+      header('Location: masuk.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Langkah 7 - Dokumen Bukti Teknis</title>
+    <title>Langkah 5 - Dokumen Bukti Tambahan</title>
     <style>
         /* CSS Styles */
 
@@ -188,7 +199,7 @@
         .card {
             border-radius: 10px;
             box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.3);
-            width: 763px;
+            width: 730px;
             height: 390px;
             background-color: #ffffff;
             padding: 30px 30px;
@@ -271,7 +282,7 @@
             font-size: 14px;
             text-decoration: none;
             width: 165px;
-            background-color: green;
+            background-color: #F66950;
             color: #fff;
             padding: 15px 25px;
             border: none;
@@ -280,13 +291,13 @@
             z-index: 99;
             top: 70%;
             border-radius: 5pt;
-            margin-left: 537px;
+            margin-left: 505px;
         }
 
         .next-btn:hover {
             background: transparent;
-            border: 1px solid green;
-            color: green;
+            border: 1px solid #F66950;
+            color: #F66950;
         }
 
         /* Report Title Styles */
@@ -325,40 +336,40 @@
         </div>
         <nav>
             <div class="menu-container">
-                <ul class="menu">
-                    <li><a href="index.html" class="nav-link" id="home">Home</a></li>
-                    <li><a href="faqPage.html" class="nav-link" id="faq">FAQ</a></li>
-                    <li><a href="buktiDigital.html" class="nav-link active" id="buktiDigital">Report</a></li>
+            <ul class="menu">
+                    <li><a href="index.php" class="nav-link" id="home">Home</a></li>
+                    <li><a href="faqPage.php" class="nav-link" id="faq">FAQ</a></li>
+                    <li><a href="buktiDigital.php" class="nav-link active" id="buktiDigital">Report</a></li>
                 </ul>
             </div>
         </nav>
         <div class="buttons">
-            <a href="masuk.html"><button class="login-btn">Masuk</button></a>
-            <a href="daftar.html"><button class="register-btn">Daftar</button></a>
-          </div>
+          <a href="logout.php"><button class="register-btn">Keluar</button></a>
+        </div>
     </header>
 
     <div class="report-title">Reporting Portal</div>
 
     <div class="container" id="dokumenBuktiTambahan">
         <div class="card">
-            <h3>Langkah 7 - Upload Dokumen Bukti Teknis</h3>
-    
+            <h3>Langkah 5 - Upload Dokumen Bukti Tambahan</h3>
+
             <div class="upload-section">
-                <div class="drop_box" id="technicalEvidenceDropBox">
-                    <h4>Laporan Analisis Keamanan</h4>
-                    <p>Jika telah ada analisis keamanan atau laporan teknis terkait insiden, dokumen tersebut dapat diunggah sebagai pendukung.</p>
-                    <input type="file" hidden accept=".pdf, .doc, .docx" id="fileTechnicalEvidence" style="display:none;">
-                    <button class="btn" onclick="document.getElementById('fileTechnicalEvidence').click()">Pilih File</button>
+                <div class="drop_box" id="additionalEvidenceDropBox">
+                    <h4>Dokumen Bukti Tambahan</h4>
+                    <p>Pengguna dapat melampirkan dokumen bukti tambahan seperti email mencurigakan, pesan teks, atau komunikasi lain yang terkait dengan insiden.</p>
+                    <input type="file" hidden accept=".pdf, .doc, .docx" id="fileAdditionalEvidence" style="display:none;">
+                    <button class="btn" onclick="document.getElementById('fileAdditionalEvidence').click()">Pilih File</button>
                 </div>
             </div>
-    
-            <button class="next-btn" id="nextBtn">Kirim Laporan &rarr;</button>
+
+            <button class="next-btn" id="nextBtn">Selanjutnya &rarr;</button>
         </div>
     </div>
-    
+
+
     <script>
-        const technicalEvidenceInput = document.getElementById("fileTechnicalEvidence");
+        const additionalEvidenceInput = document.getElementById("fileAdditionalEvidence");
         const nextBtn = document.getElementById("nextBtn");
     
         const setupFileUpload = (input, dropArea) => {
@@ -371,16 +382,16 @@
             input.addEventListener("change", function (e) {
                 var fileName = e.target.files[0].name;
                 let filedata = `
-                    <div class="form">
-                        <br>
-                        <center>
-                            <h4>${fileName}</h4>
-                        </center><br>
+                  <div class="form">
+                    <br>
+                    <center>
+                      <h4>${fileName}</h4>
+                    </center><br>
     
-                        <center>
-                            <button class="btn" onclick="changeFile('${input.id}', '${dropArea.id}')">Ganti File</button>
-                        </center>
-                    </div>`;
+                    <center>
+                      <button class="btn" onclick="changeFile('${input.id}', '${dropArea.id}')">Ganti File</button>
+                    </center>
+                  </div>`;
                 dropArea.innerHTML = filedata;
                 dropArea.style.borderColor = '#008000';
                 setupFileUpload(input, dropArea);
@@ -394,7 +405,7 @@
             input.value = "";
             dropArea.innerHTML = `
                 <header>
-                    <h4>File yang akan diunggah</h4>
+                  <h4>File yang akan diunggah</h4>
                 </header>
                 <p>Pilih file untuk diunggah</p>
                 <input type="file" hidden accept=".pdf, .doc, .docx" id="${inputId}" style="display:none;">
@@ -402,13 +413,11 @@
             setupFileUpload(input, dropArea);
         }
     
-        setupFileUpload(technicalEvidenceInput, document.getElementById("technicalEvidenceDropBox"));
+        setupFileUpload(additionalEvidenceInput, document.getElementById("additionalEvidenceDropBox"));
         nextBtn.onclick = function () {
-            window.location.href = "index.html";
+            window.location.href = "dokumenPendukungHukum.html";
         };
     </script>
-    
-    
     
     </body>
     

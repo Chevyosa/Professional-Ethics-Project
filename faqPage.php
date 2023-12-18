@@ -1,10 +1,14 @@
+<?php
+    include 'koneksi.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>FAQ</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" charset="utf-8"></script>
   <style media="screen">
     body::before,
@@ -292,15 +296,14 @@ line-height: 1.7em;
     <nav>
       <div class="menu-container">
         <ul class="menu">
-          <li><a href="index.php" class="nav-link" id="home">Home</a></li>
-          <li><a href="faqPage.html" class="nav-link active" id="faq">FAQ</a></li>
-          <li><a href="buktiDigital.html" class="nav-link" id="buktiDigital">Report</a></li>
-      </ul>
+            <li><a href="index.php" class="nav-link" id="home">Home</a></li>
+            <li><a href="faqPage.php" class="nav-link active" id="faq">FAQ</a></li>
+            <li><a href="buktiDigital.php" class="nav-link" id="buktiDigital">Report</a></li>
+        </ul>
       </div>
     </nav>
     <div class="buttons">
-      <a href="masuk.php"><button class="login-btn">Masuk</button></a>
-      <a href="daftar.php"><button class="register-btn">Daftar</button></a>
+      <a href="logout.php"><button class="register-btn">Keluar</button></a>
     </div>
   </header>
 
@@ -318,60 +321,111 @@ line-height: 1.7em;
             <div class="accordions">
               <div class="accordion-item">
                 <div class="accordion-title" data-tab="item1">
-                  <h3>Why FutureRDP? <i class="fa fa-chevron-down"></i></h3>
+                  <h3>Apa tujuan dari Sistem Pelaporan Keamanan Siber ini?<i class="fa fa-chevron-down"></i></h3>
                 </div>
                 <div class="accordion-content" id="item1">
                   <p>
-                    FutureRDP provides cheap and affordable Linux and Windows VPS servers and
-                    storage solution since 2008 for more than 11 years in multiple locations such as
-                    the United States, UK, France, Germany, Netherlands, and Canada. We have a range
-                    of different solutions for different purposes such as SSD VPS and Storage
-                    servers. All servers are equipped with RAID10 only SSD drives and FREE DDoS
-                    Protection!
+                    Tujuan utama sistem ini adalah memberikan sarana efektif bagi pengguna internet untuk melaporkan kejahatan siber dan aktivitas mencurigakan, menciptakan lingkungan online yang lebih aman.
                   </p>
                 </div>
               </div>
 
               <div class="accordion-item">
                 <div class="accordion-title" data-tab="item2">
-                  <h3>What is Windows VPS? <i class="fa fa-chevron-down"></i></h3>
+                  <h3>Bagaimana cara melaporkan kejahatan siber melalui sistem ini?<i class="fa fa-chevron-down"></i></h3>
                 </div>
                 <div class="accordion-content" id="item2">
                   <p>
-                    With a Windows VPS server, you will get a Remote Desktop connection within a few
-                    minutes. You can run Windows applications such as IIS, SQL, Microsoft Exchange
-                    or any software like Docking, Forex trading, Crypto Trading etc… or anything
-                    which you wish for. Just like your own computer!! but the difference is online
-                    24/7 days without interruptions and with a super fast Internet connection!
+                    Pengguna dapat mengakses formulir pelaporan intuitif di website kami dan mengisi detail kejadian keamanan siber yang mereka alami atau saksikan.
                   </p>
                 </div>
               </div>
 
               <div class="accordion-item">
                 <div class="accordion-title" data-tab="item3">
-                  <h3>Payment Options <i class="fa fa-chevron-down"></i></h3>
+                  <h3>Apakah identitas saya akan dirahasiakan saat melaporkan kejadian keamanan siber?<i class="fa fa-chevron-down"></i></h3>
                 </div>
                 <div class="accordion-content" id="item3">
                   <p>
-                    Unlike most other providers you don’t have to pay with just Credit Card or
-                    PayPal. You can also pay with Bitcoin, Alt Coins like Ethereum or Litecoin,
-                    PerfectMoney, Payza and of course you can still pay by PayPal and Credit Cards.
-                    You even get more discounts when you choose longer-term commitments like our
-                    attractive yearly plans.
+                    Ya, identitas pelapor akan dijaga kerahasiaannya sesuai dengan kebijakan privasi dan hukum yang berlaku.
                   </p>
                 </div>
               </div>
 
               <div class="accordion-item">
                 <div class="accordion-title" data-tab="item4">
-                  <h3>Free DDOS Protection <i class="fa fa-chevron-down"></i></h3>
+                  <h3>Bagaimana sistem ini memberikan respons terhadap laporan?<i class="fa fa-chevron-down"></i></h3>
                 </div>
                 <div class="accordion-content" id="item4">
                   <p>
-                    Unlike other providers who charge extra for DDoS protection, All of our VPS
-                    servers comes with DDoS protection for FREE. This means you do not have to worry
-                    about your VPS performance at all. We are taking care of your needs while you do
-                    focus on your business!
+                    Tim kami akan memberikan respon yang cepat dalam waktu 24 jam untuk mengevaluasi dan merespons laporan yang diterima.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item5">
+                  <h3>Apa langkah keamanan yang diimplementasikan dalam pengumpulan informasi pelaporan?<i class="fa fa-chevron-down"></i></h3>
+                </div>
+                <div class="accordion-content" id="item5">
+                  <p>
+                    Kami menerapkan langkah-langkah keamanan ketat untuk melindungi informasi yang dilaporkan agar tidak jatuh ke tangan yang tidak berwenang.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item6">
+                  <h3>Apakah sistem ini dapat diakses oleh masyarakat umum?<i class="fa fa-chevron-down"></i></h3>
+                </div>
+                <div class="accordion-content" id="item6">
+                  <p>
+                  Ya, sistem pelaporan ini dapat diakses secara publik untuk memastikan partisipasi aktif dari seluruh lapisan masyarakat.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item7">
+                  <h3>Apakah ada pelatihan yang disediakan untuk menggunakan sistem pelaporan?<i class="fa fa-chevron-down"></i></h3>
+                </div>
+                <div class="accordion-content" id="item7">
+                  <p>
+                    Ya, kami menyediakan pelatihan untuk memastikan pengguna memahami cara menggunakan sistem ini dengan benar.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item8">
+                  <h3>Bagaimana koordinasi antara sistem pelaporan dengan lembaga penegak hukum dan<i class="fa fa-chevron-down"></i></h3>
+                  <h3>penyedia layanan internet?</h3>
+                </div>
+                <div class="accordion-content" id="item8">
+                  <p>
+                    Sistem ini memanfaatkan integrasi API dan kerja sama aktif dengan pihak terkait untuk koordinasi yang efektif dalam menanggapi insiden.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item9">
+                  <h3>Apa yang terjadi setelah saya melaporkan kejahatan siber?<i class="fa fa-chevron-down"></i></h3>
+                </div>
+                <div class="accordion-content" id="item9">
+                  <p>
+                  Tim kami akan menindaklanjuti laporan, melakukan evaluasi, dan mengambil langkah-langkah yang diperlukan untuk menanggapi insiden.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <div class="accordion-title" data-tab="item10">
+                  <h3>Apakah ada dokumentasi yang harus saya lampirkan sebagai bukti pendukung pelaporan?<i class="fa fa-chevron-down"></i></h3>
+                </div>
+                <div class="accordion-content" id="item10">
+                  <p>
+                  Ya, dalam sistem ini, pengguna dapat mengunggah berbagai dokumen seperti tangkapan layar, file log, atau dokumen lain sebagai pendukung laporan keamanan siber mereka.
                   </p>
                 </div>
               </div>

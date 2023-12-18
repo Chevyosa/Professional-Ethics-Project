@@ -1,20 +1,15 @@
-<?php 
+<?php
+// Database configuration
+$hostname = 'localhost'; // Replace with your database host name or IP address
+$username = 'root'; // Replace with your database username
+$password = ''; // Replace with your database password
+$database = 'ccrp'; // Replace with your database name
 
-$server = "localhost";
-$user = "root";
-$pass = "";
-$database = "ccrp";
+// Create a database connection
+$connect = new mysqli($hostname, $username, $password, $database);
 
-$conn = mysqli_connect($server, $user, $pass, $database);
-
-if (!$conn) 
-{
-    die("<script>alert('Failed to connect with Database.')</script>");
+// Check the connection
+if ($connect->connect_error) {
+    die("Connection failed: " . $connect->connect_error);
 }
-
-$result = mysqli_query($conn, "SELECT 1");
-if (!$result) {
-    die("Error: " . mysqli_error($conn));
-}
-
 ?>

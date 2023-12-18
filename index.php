@@ -1,5 +1,12 @@
 <?php
     include 'koneksi.php';
+    //inisialisasi session
+    session_start();
+    //mengecek username pada session
+    if( !isset($_SESSION['email']) ){
+      $_SESSION['msg'] = 'anda harus login untuk mengakses halaman ini';
+      header('Location: masuk.php');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -24,15 +31,14 @@
     <nav>
       <div class="menu-container">
         <ul class="menu">
-          <li><a href="index.html" class="nav-link active" id="home">Home</a></li>
+          <li><a href="index.php" class="nav-link active" id="home">Home</a></li>
           <li><a href="faqPage.html" class="nav-link" id="faq">FAQ</a></li>
           <li><a href="buktiDigital.html" class="nav-link" id="buktiDigital">Report</a></li>
       </ul>
       </div>
     </nav>
     <div class="buttons">
-      <a href="masuk.html"><button class="login-btn">Masuk</button></a>
-      <a href="daftar.html"><button class="register-btn">Daftar</button></a>
+      <a href="logout.php"><button class="register-btn">Keluar</button></a>
     </div>
   </header>
 

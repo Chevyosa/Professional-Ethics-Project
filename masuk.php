@@ -1,3 +1,43 @@
+<?php
+require_once('koneksi.php');
+
+// Start a session
+session_start();
+
+if (isset($_POST['submit']) ) {
+//dapatkan data user dari form
+$user = [
+    'email' => $_POST['email'],
+    'password' => $_POST['password'],
+];
+//check apakah user dengan email tersebut ada di table users
+$query = "select * from tb_user where email = ? limit 1";
+$stmt = $connect->stmt_init();
+$stmt->prepare($query);
+$stmt->bind_param('s', $user['email']);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_array(MYSQLI_ASSOC);
+if($row != null){
+    //email ditemukan
+    //kita cek apakah password dengan hash password sesuai.
+    if(password_verify($user['password'], $row['password'])){
+        $_SESSION['login'] = true;
+        $_SESSION['email'] =  $user['email'];
+        $_SESSION['username'] =  $user['username'];
+        $_SESSION['message']  = 'Berhasil login ke dalam sistem.';
+        header("Location: index.php");
+    }else{
+        $_SESSION['error'] = 'Password anda salah.';
+        header("Location: masuk.php");
+    }
+}else{
+    $_SESSION['error'] = 'Username dan password anda tidak ditemukan.';
+    header("Location: masuk.php");
+}
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +45,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
 
     <!-- ===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -266,16 +307,19 @@
     </div>
 
         <div class="forms">
-            <div class="form login">
+        <form method="post" class="form login">
                 <span class="title">Login</span>
-
-                <form action="#">
+                <?php if (!empty($errorMsg)) : ?>
+                    <div class="alert alert-danger mt-3" role="alert">
+                        <?php echo $errorMsg == 1 ? 'Login dulu sebelum kehalaman tersebut' : $errorMsg; ?>
+                    </div>
+                <?php endif; ?>
                     <div class="input-field">
-                        <input type="text" placeholder="Enter your email" required>
+                        <input type="email" name="email" placeholder="Enter your email" required>
                         <i class="uil uil-envelope icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Enter your password" required>
+                        <input type="password" name="password" class="password" placeholder="Enter your password" required>
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
                     </div>
@@ -289,16 +333,16 @@
                         <a href="#" class="text">Forgot password?</a>
                     </div>
 
-                    <div class="input-field button">
-                        <input type="button" value="Login">
+                    <div class="d-grid gap-2">
+                        <button type="submit" name="submit" class="btn btn-primary" type="button">Sign In</button>
+                    </div>
+                    
+                    <div class="login-signup">
+                        <span class="text">Not a member?
+                            <a href="daftar.php" class="text signup-link">Signup Now</a>
+                        </span>
                     </div>
                 </form>
-
-                <div class="login-signup">
-                    <span class="text">Not a member?
-                        <a href="daftar.html" class="text signup-link">Signup Now</a>
-                    </span>
-                </div>
             </div>
         </div>
     </div>
@@ -333,13 +377,6 @@
             })
         })
 
-        // JS code to appear signup and login form
-        signUp.addEventListener("click", () => {
-            container.classList.add("active");
-        });
-        login.addEventListener("click", () => {
-            container.classList.remove("active");
-        });
     </script>
 </body>
 

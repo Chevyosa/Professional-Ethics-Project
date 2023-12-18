@@ -1,3 +1,33 @@
+<?php
+
+require_once("koneksi.php");
+
+if(isset($_POST['register'])){
+
+    // filter data yang diinputkan
+        $username    = strip_tags($_POST['username']);
+        $password    = strip_tags($_POST['password']);
+        $email    = strip_tags($_POST['email']);
+
+        if(empty($email) || empty($password) || empty($username)) {
+          /**
+           * Cek apakah formulir telah terisi data.
+           */
+          echo '<b>Warning!</b> Silahkan isi data yang diperlukan.';
+        } else {
+          /**
+           * Memasukkan data ke database.
+           */
+          $insert = $connect->query('INSERT INTO `tb_user`(`username`,`email`, `password`) VALUES("'.$username.'","'.$email.'", "'.password_hash($password, PASSWORD_BCRYPT).'")');
+          if($insert) {
+            echo 'Pendaftaran berhasil!';
+             header("Location: masuk.php");
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,6 +35,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
 
     <!-- ===== Iconscout CSS ===== -->
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -263,21 +294,21 @@
             <div class="form signup">
                 <span class="title">Registration</span>
 
-                <form action="#">
+                <form method="POST">
                     <div class="input-field">
-                        <input type="text" placeholder="Enter your name" required>
+                        <input type="text"  name="username" placeholder="Enter your username" required>
                         <i class="uil uil-user"></i>
                     </div>
                     <div class="input-field">
-                        <input type="text" placeholder="Enter your email" required>
+                        <input type="text"  name="email" placeholder="Enter your email" required>
                         <i class="uil uil-envelope icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Create a password" required>
+                        <input type="password"  name="password" class="password" placeholder="Create a password" required>
                         <i class="uil uil-lock icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Confirm a password" required>
+                        <input type="password"  name="repassword" class="password" placeholder="Confirm a password" required>
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
                     </div>
@@ -289,14 +320,14 @@
                         </div>
                     </div>
 
-                    <div class="input-field button">
-                        <input type="button" value="Signup">
+                    <div class="d-grid gap-2">
+                        <input type="submit" class="btn btn-primary btn-block" name="register" value="Daftar" />
                     </div>
                 </form>
 
                 <div class="login-signup">
                     <span class="text">Already a member?
-                        <a href="masuk.html" class="text login-link">Login Now</a>
+                        <a href="masuk.php" class="text login-link">Login Now</a>
                     </span>
                 </div>
             </div>
@@ -333,13 +364,6 @@
             })
         })
 
-        // JS code to appear signup and login form
-        signUp.addEventListener("click", () => {
-            container.classList.add("active");
-        });
-        login.addEventListener("click", () => {
-            container.classList.remove("active");
-        });
     </script>
 </body>
 

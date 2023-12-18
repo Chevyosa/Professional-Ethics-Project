@@ -327,8 +327,8 @@ button {
       <div class="menu-container">
         <ul class="menu">
           <li><a href="index.php" class="nav-link" id="home">Home</a></li>
-          <li><a href="faqPage.html" class="nav-link" id="faq">FAQ</a></li>
-          <li><a href="buktiDigital.html" class="nav-link active" id="buktiDigital">Report</a></li>
+          <li><a href="faqPage.php" class="nav-link" id="faq">FAQ</a></li>
+          <li><a href="buktiDigital.php" class="nav-link active" id="buktiDigital">Report</a></li>
       </ul>
       </div>
     </nav>

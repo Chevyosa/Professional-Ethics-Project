@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function navigateToPage(pageId) {
     const pageMappings = {
-      'home': 'index.html',
-      'faq': 'faqPage.html',
-      'aboutUsDetail': 'aboutUsDetail.html', // Add the new mapping
+      'home': 'index.php',
+      'faq': 'faqPage.php',
+      'aboutUsDetail': 'aboutUsDetail.php', // Add the new mapping
       // Add more mappings as needed
     };
     const targetUrl = pageMappings[pageId];

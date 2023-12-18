@@ -3,60 +3,344 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.jsdelivr.net/npm/lottie-web@5.7.8/build/player/lottie.min.js"></script>
+    <!-- ===== Iconscout CSS ===== -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
-    <title>FAQ | CyberCrime Reporting Portal</title>
+
+    <style>
+        /* Additional Styles Go Here */
+
+        /* ===== Google Font Import - Poformsins ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #171717;
+        }
+
+        body::before,
+        body::after {
+            content: '';
+            display: block;
+            position: absolute;
+            top: 0;
+        }
+
+        body::before {
+            left: 0;
+            width: 60%;
+            height: 100%;
+            background-image: url('images/lineTexture.svg');
+            background-size: 100%;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            display: block;
+            position: fixed;
+            top: -60%;
+            right: -35%;
+            width: 100%;
+            height: 200%;
+            background-image: url('images/glowTexture.svg');
+            background-size: contain;
+            background-position: top right;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+
+        .container {
+            position: relative;
+            max-width: 430px;
+            width: 100%;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin: 0 20px;
+        }
+
+        .container .forms {
+            display: flex;
+            align-items: center;
+            height: 440px;
+            width: 200%;
+            transition: height 0.2s ease;
+        }
+
+        .container .form {
+            width: 50%;
+            padding: 30px;
+            background-color: #fff;
+            transition: margin-left 0.18s ease;
+        }
+
+        .container.active .login {
+            margin-left: -50%;
+            opacity: 0;
+            transition: margin-left 0.18s ease, opacity 0.15s ease;
+        }
+
+        .container .signup {
+            opacity: 0;
+            transition: opacity 0.09s ease;
+        }
+
+        .container.active .signup {
+            opacity: 1;
+            transition: opacity 0.2s ease;
+        }
+
+        .container.active .forms {
+            height: 600px;
+        }
+
+        .container .form .title {
+            position: relative;
+            font-size: 27px;
+            font-weight: 600;
+        }
+
+        .form .title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            height: 3px;
+            width: 30px;
+            background-color: #4070f4;
+            border-radius: 25px;
+        }
+
+        .form .input-field {
+            position: relative;
+            height: 50px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .input-field input {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            padding: 0 35px;
+            border: none;
+            outline: none;
+            font-size: 16px;
+            border-bottom: 2px solid #ccc;
+            border-top: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .input-field input:is(:focus, :valid) {
+            border-bottom-color: #4070f4;
+        }
+
+        .input-field i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 23px;
+            transition: all 0.2s ease;
+        }
+
+        .input-field input:is(:focus, :valid)~i {
+            color: #4070f4;
+        }
+
+        .input-field i.icon {
+            left: 0;
+        }
+
+        .input-field i.showHidePw {
+            right: 0;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .form .checkbox-text {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .checkbox-text .checkbox-content {
+            display: flex;
+            align-items: center;
+        }
+
+        .checkbox-content input {
+            margin-right: 10px;
+            accent-color: #4070f4;
+        }
+
+        .form .text {
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form a.text {
+            color: #4070f4;
+            text-decoration: none;
+        }
+
+        .form a:hover {
+            text-decoration: underline;
+        }
+
+        .form .button {
+            margin-top: 35px;
+        }
+
+        .form .button input {
+            border: none;
+            color: #fff;
+            font-size: 17px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-radius: 6px;
+            background-color: #4070f4;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .button input:hover {
+            background-color: #265df2;
+        }
+
+        .form .login-signup {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+
+
+
+        /* Add the close icon style */
+        .close-icon {
+            position: absolute;
+            top: 28px;
+            right: 28px;
+            cursor: pointer;
+            color: #ccc;
+            font-size: 30px;
+            transition: color 0.3s ease;
+        }
+
+        .close-icon:hover {
+            color: #000; /* Change color on hover */
+        }
+
+        
+    </style>
+
+    <title>Login Form</title>
+
+
 </head>
 
-<body>
-    <header>
-        <div class="logo">
-          <img src="images/logo.svg" alt="Cyber Crime Reporting Portal">
-        </div>
-        <nav>
-          <div class="menu-container">
-            <ul class="menu">
-                <li><a href="#" class="nav-link" id="home">Home</a></li>
-                <li><a href="faqPage.html" class="nav-link" id="faq">FAQ</a></li>
-                <li><a href="report.html" class="nav-link" id="report">Report</a></li>
-            </ul>
-          </div>
-        </nav>
-        <div class="buttons">
-          <a href="masuk.html"><button class="login-btn">Masuk</button></a>
-          <a href="daftar.html"><button class="register-btn">Daftar</button></a>
-        </div>
-    </header>
-    
-    <section class="reg-form">
-      <section class="reg-container">
-        <div class="container-content">
-          <div class="header-form">
-            <img src="./images/Frame 38.png" class="form-img" alt="">
-            <h3>Silahkan Isi Kolom Dibawah untuk<br>Masuk</h3>
-          </div>
-          <form action="" class="nama-pengguna">
-            <label for="nama-pengguna">Masukkan Nama Pengguna</label>
-            <input type="text" id="nama-pengguna" name="nama-pengguna">
-          </form>
-          <form action="" class="password-pengguna">
-            <label for="password-pengguna">Masukkan Password</label>
-            <input type="password" id="password-pengguna" name="password-pengguna">
-          </form>
-          <div class="reg-btn">
-            <a href="report.html"><button class="tombol-masuk">Masuk</button></a>
-            <p class="login-offer">Belum Punya Akun? <a href="masuk.html" class="login-txt">Daftar</a></p>
-          </div>
-        </div>
-      </section>
-    </section>
 
-    <script src="script.js"></script>
+<body>
+
+    <div class="container">
+
+      <div class="close-icon" onclick="window.location.href='index.html'"> <!-- Add the onclick event to navigate to index.html -->
+        <i class="uil uil-times"></i>
+    </div>
+
+        <div class="forms">
+            <div class="form login">
+                <span class="title">Login</span>
+
+                <form action="#">
+                    <div class="input-field">
+                        <input type="text" placeholder="Enter your email" required>
+                        <i class="uil uil-envelope icon"></i>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" class="password" placeholder="Enter your password" required>
+                        <i class="uil uil-lock icon"></i>
+                        <i class="uil uil-eye-slash showHidePw"></i>
+                    </div>
+
+                    <div class="checkbox-text">
+                        <div class="checkbox-content">
+                            <input type="checkbox" id="logCheck">
+                            <label for="logCheck" class="text">Remember me</label>
+                        </div>
+
+                        <a href="#" class="text">Forgot password?</a>
+                    </div>
+
+                    <div class="input-field button">
+                        <input type="button" value="Login">
+                    </div>
+                </form>
+
+                <div class="login-signup">
+                    <span class="text">Not a member?
+                        <a href="daftar.html" class="text signup-link">Signup Now</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JS Code Goes Here
+
+        const container = document.querySelector(".container"),
+            pwShowHide = document.querySelectorAll(".showHidePw"),
+            pwFields = document.querySelectorAll(".password"),
+            signUp = document.querySelector(".signup-link"),
+            login = document.querySelector(".login-link");
+
+        //   JS code to show/hide password and change icon
+        pwShowHide.forEach(eyeIcon => {
+            eyeIcon.addEventListener("click", () => {
+                pwFields.forEach(pwField => {
+                    if (pwField.type === "password") {
+                        pwField.type = "text";
+
+                        pwShowHide.forEach(icon => {
+                            icon.classList.replace("uil-eye-slash", "uil-eye");
+                        })
+                    } else {
+                        pwField.type = "password";
+
+                        pwShowHide.forEach(icon => {
+                            icon.classList.replace("uil-eye", "uil-eye-slash");
+                        })
+                    }
+                })
+            })
+        })
+
+        // JS code to appear signup and login form
+        signUp.addEventListener("click", () => {
+            container.classList.add("active");
+        });
+        login.addEventListener("click", () => {
+            container.classList.remove("active");
+        });
+    </script>
+</body>
 
 </html>
